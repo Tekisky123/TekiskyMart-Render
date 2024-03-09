@@ -16,9 +16,9 @@ dotenv.config();
 
 //AWS Upload Code
 aws.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SEC_KEY,
-  region: process.env.AWS_REGION,
+  accessKeyId: process.env.AWSS_OPEN_KEY,
+  secretAccessKey: process.env.AWSS_SEC_KEY,
+  region: process.env.AWSS_REGION,
 });
 
 const s3 = new aws.S3();
@@ -26,7 +26,7 @@ const s3 = new aws.S3();
 const uploadFile = async (file) => {
   // console.log('File Buffer:', file.buffer); // Log the file buffer
   const params = {
-    Bucket: process.env.AWS_BUCKET_NAME,
+    Bucket: process.env.AWSS_BUCKET_NAME,
     Key: `images/${Date.now()}_${file.originalname}`,
     Body: file.buffer,
   };
