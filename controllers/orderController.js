@@ -32,69 +32,69 @@ const generateOrderId = () => {
   }
 };
 
-const sendMessage = async (senderNumber, recipientNumber, _id) => {
-  try {
-    const accessToken = process.env.WHATSAPP_TOKEN;
-    const baseUrl = "https://tekiskymart.com/";
-    const url = "https://graph.facebook.com/v18.0/160700440470778/messages";
+// const sendMessage = async (senderNumber, recipientNumber, _id) => {
+//   try {
+//     const accessToken = process.env.WHATSAPP_TOKEN;
+//     const baseUrl = "https://tekiskymart.com/";
+//     const url = "https://graph.facebook.com/v18.0/160700440470778/messages";
 
-    // Construct the message template data
-    const templateData = {
-      messaging_product: "whatsapp",
-      type: "template",
-      template: {
-        name: "tekiskymart",
-        language: {
-          code: "en_US",
-        },
-        components: [
-          {
-            type: "body",
-            parameters: [
-              {
-                type: "text",
-                text: `http://localhost:3000/order-bill/${_id}`,
-              },
-            ],
-          },
-        ],
-      },
-    };
+//     // Construct the message template data
+//     const templateData = {
+//       messaging_product: "whatsapp",
+//       type: "template",
+//       template: {
+//         name: "tekiskymart",
+//         language: {
+//           code: "en_US",
+//         },
+//         components: [
+//           {
+//             type: "body",
+//             parameters: [
+//               {
+//                 type: "text",
+//                 text: `http://localhost:3000/order-bill/${_id}`,
+//               },
+//             ],
+//           },
+//         ],
+//       },
+//     };
 
-    // Set the request headers
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    };
+//     // Set the request headers
+//     const headers = {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${accessToken}`,
+//     };
 
-    // Set the recipient and data for the message
-    const data = { ...templateData, to: recipientNumber };
+//     // Set the recipient and data for the message
+//     const data = { ...templateData, to: recipientNumber };
 
-    // Log the data being sent
-    console.log("Sending message with data:", JSON.stringify(data));
+//     // Log the data being sent
+//     console.log("Sending message with data:", JSON.stringify(data));
 
-    // Send the message using Axios
-    const response = await axios.post(url, data, { headers });
+//     // Send the message using Axios
+//     const response = await axios.post(url, data, { headers });
 
-    // Log the response
-    console.log("WhatsApp API response:", response.data);
+//     // Log the response
+//     console.log("WhatsApp API response:", response.data);
 
-    // Check the response status
-    if (response.status !== 200) {
-      console.error(
-        `WhatsApp API request failed with status code ${response.status}`
-      );
-    } else {
-      console.log("Message sent successfully!");
-    }
-  } catch (error) {
-    // Log any errors during sending
-    console.error("Error sending WhatsApp message:", error.message);
-    if (error.response) {
-      console.error("WhatsApp API error response:", error.response.data);
-    }
-  }
-};
+//     // Check the response status
+//     if (response.status !== 200) {
+//       console.error(
+//         `WhatsApp API request failed with status code ${response.status}`
+//       );
+//     } else {
+//       console.log("Message sent successfully!");
+//     }
+//   } catch (error) {
+//     // Log any errors during sending
+//     console.error("Error sending WhatsApp message:", error.message);
+//     if (error.response) {
+//       console.error("WhatsApp API error response:", error.response.data);
+//     }
+//   }
+// };
 
 export const addOrder = async (req, res) => {
   try {
@@ -108,15 +108,15 @@ export const addOrder = async (req, res) => {
     if (status.success) {
       const { mobileNumber, customerName, productDetails, totalAmount, _id } =
         status.order;
-      const additionalNumbers = ["6281017334", "7842363997"];
+      // const additionalNumbers = ["6281017334", "7842363997"];
 
       // Send order confirmation message to the customer
-      await sendMessage(mobileNumber, mobileNumber, _id);
+      // await sendMessage(mobileNumber, mobileNumber, _id);
 
       // Send order confirmation message to junaid sir and umair sir
-      for (const additionalNumber of additionalNumbers) {
-        await sendMessage(mobileNumber, additionalNumber, _id);
-      }
+      // for (const additionalNumber of additionalNumbers) {
+      //   await sendMessage(mobileNumber, additionalNumber, _id);
+      // }
 
       // Respond with success message
       res.status(201).json({
