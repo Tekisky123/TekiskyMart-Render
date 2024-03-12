@@ -108,15 +108,15 @@ export const addOrder = async (req, res) => {
     if (status.success) {
       const { mobileNumber, customerName, productDetails, totalAmount, _id } =
         status.order;
-      const additionalNumbers = ["6281017334", "7842363997"];
+      // const additionalNumbers = ["6281017334", "7842363997"];
 
       // Send order confirmation message to the customer
-      await sendMessage(mobileNumber, mobileNumber, _id);
+      // await sendMessage(mobileNumber, mobileNumber, _id);
 
       // Send order confirmation message to junaid sir and umair sir
-      for (const additionalNumber of additionalNumbers) {
-        await sendMessage(mobileNumber, additionalNumber, _id);
-      }
+      // for (const additionalNumber of additionalNumbers) {
+      //   await sendMessage(mobileNumber, additionalNumber, _id);
+      // }
 
       // Respond with success message
       res.status(201).json({
