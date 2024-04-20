@@ -3,9 +3,8 @@ import CustomerModel from "../models/customerModel.js";
 export const addCustomerNumber = async ({
   mobileNumber,
   customerName,
-  category
+  category,
 }) => {
- 
   try {
     if (!mobileNumber || !customerName) {
       throw new Error("Mobile number and customer name are required.");
@@ -14,8 +13,7 @@ export const addCustomerNumber = async ({
     const newCustomer = new CustomerModel({
       mobileNumber,
       customerName,
-      category
-     
+      category: Array.isArray(category) ? category.join(', ') : category, // Ensure category is always a string
     });
 
     await newCustomer.save();
