@@ -5,15 +5,14 @@ import {
   customerDetailsService,
 } from "../services/customerSevices.js";
 import xlsx from "xlsx";
-
 export const addCustomerNumberController = async (req, res) => {
-  const { mobileNumber, customerName } = req.body;
-  // console.log(req.body);
+  const { mobileNumber, customerName, category } = req.body; // Include category from the request body
   try {
     if (!req.file) {
       await addCustomerNumber({
         mobileNumber,
         customerName,
+        category, // Include category in the addCustomerNumber function call
       });
       return res
         .status(201)
@@ -31,6 +30,7 @@ export const addCustomerNumberController = async (req, res) => {
       await addCustomerNumber({
         mobileNumber,
         customerName,
+        category, // Include category in the addCustomerNumber function call
       });
     }
 
@@ -61,6 +61,7 @@ export const updateCustomer = async (req, res) => {
     console.log(error.message);
   }
 };
+
 
 export const deleteCustomer = async (req, res) => {
   const id = req.params.id;
