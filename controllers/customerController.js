@@ -37,7 +37,7 @@ export const addCustomerNumberController = async (req, res) => {
     res.status(200).json({ success: true, message: "Data added successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    res.status(500).json({ success: false, message: "Internal server error",error: error.message  });
   }
 };
 
