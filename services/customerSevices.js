@@ -13,7 +13,7 @@ export const addCustomerNumber = async ({
     const newCustomer = new CustomerModel({
       mobileNumber,
       customerName,
-      category: Array.isArray(category) ? category.join(', ') : category, // Ensure category is always a string
+      category: Array.isArray(category) , // Ensure category is always a string
     });
 
     await newCustomer.save();
