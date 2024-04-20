@@ -3,30 +3,26 @@ import CustomerModel from "../models/customerModel.js";
 export const addCustomerNumber = async ({
   mobileNumber,
   customerName,
-  category,
+  category
 }) => {
+ 
   try {
-    if (!mobileNumber || !customerName || !category) {
-      throw new Error("Mobile number, customer name, and category are required.");
+    if (!mobileNumber || !customerName) {
+      throw new Error("Mobile number and customer name are required.");
     }
 
-    // Ensure category is always an array
-    const categories = Array.isArray(category) ? category : [category];
-
-    const newCustomers = categories.map((cat) => {
-      return new CustomerModel({
-        mobileNumber,
-        customerName,
-        category: cat.trim(), // Trim whitespace from category
-      });
+    const newCustomer = new CustomerModel({
+      mobileNumber,
+      customerName,
+      category
+     
     });
 
-    // Save all new customers asynchronously
-    const savedCustomers = await Promise.all(newCustomers.map(customer => customer.save()));
+    await newCustomer.save();
 
-    console.log("Customers added successfully:", savedCustomers);
+    console.log("Customer added successfully:", newCustomer);
 
-    return savedCustomers;
+    return newCustomer;
   } catch (error) {
     console.error("Error adding customer:", error);
     throw error; // Re-throw the error for handling in the controller
