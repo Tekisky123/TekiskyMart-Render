@@ -7,7 +7,7 @@ export const addCustomerNumber = async ({
 }) => {
  
   try {
-    if (!mobileNumber || !customerName) {
+    if (!mobileNumber || !customerName || category ) {
       throw new Error("Mobile number and customer name are required.");
     }
 
