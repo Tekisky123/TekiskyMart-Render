@@ -1,6 +1,6 @@
 import { addProduct, deleteProduct, getProduct, updateProduct,getOneProduct,dealOfTheDay, getCategories, findProductsByMobileNumber,getApprovedProduct} from "../controllers/productController.js";
 import  express from "express";
-import multer, { memoryStorage } from "multer"
+import multer from "multer"
 import authenticateToken from "../authentication/userAuth.js";
 const upload = multer({ storage: multer.memoryStorage() });
 

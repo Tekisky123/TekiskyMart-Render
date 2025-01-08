@@ -83,7 +83,7 @@ export const updateProduct = async (req, res) => {
   try {
     const id = req.params.id;
     const updatedData = req.body;
-    console.log(req.file)
+    console.log(req.file);
 
     if (req.files && req.files.length > 0) {
       const fileUploads = await Promise.all(
@@ -93,9 +93,8 @@ export const updateProduct = async (req, res) => {
       const uploadedFileUrls = fileUploads.map((file) => file.Location);
 
       updatedData.imageURL = uploadedFileUrls;
-      
     }
-    
+
     const updatedProduct = await productUpdateService(id, updatedData);
 
     res.status(200).json({
@@ -186,8 +185,6 @@ export const getApprovedProduct = async (req, res) => {
       products: approvedProduct,
     });
   } catch (error) {
-    console.error(error.message);
-
     res.status(500).json({
       success: false,
       message: "Error retrieving approved products",

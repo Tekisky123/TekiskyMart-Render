@@ -143,6 +143,7 @@ export const getCategoriesService = async () => {
 export const getApprovedProductService = async () => {
   try {
     const approvedProducts = await ProductModel.find({ approved: true });
+    console.log("approevd" , approvedProducts)
 
     if (approvedProducts.length === 0) {
       throw new Error('No approved products found');
